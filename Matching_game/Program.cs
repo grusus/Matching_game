@@ -65,11 +65,11 @@ namespace Matching_Game
                                 for (int k = 1; k < i; k++)
                                 {
                                     if (i > 1 && listrandompicked[i] == listrandompicked[i - k])
-                                    {
-                                        listrandompicked.RemoveAt(listrandompicked.Count - 1);
-                                        i--;
-                                    }
+                                {
+                                    listrandompicked.RemoveAt(listrandompicked.Count - 1);
+                                    i--;
                                 }
+                            }
                             }
 
                             List<string> finalist = new List<string>();
@@ -300,10 +300,10 @@ namespace Matching_Game
                                 for (int k = 1; k < i; k++)
                                 {
                                     if (i > 1 && listrandompicked2[i] == listrandompicked2[i - k])
-                                    {
-                                        listrandompicked2.RemoveAt(listrandompicked2.Count - 1);
-                                        i--;
-                                    }
+                                {
+                                    listrandompicked2.RemoveAt(listrandompicked2.Count - 1);
+                                    i--;
+                                }
                                 }
 
                             }
