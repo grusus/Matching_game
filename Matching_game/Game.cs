@@ -119,7 +119,7 @@ namespace MatchingGame
 
         private void LoadWordsFromFile()
         {
-            _words = File.ReadAllLines(@"Words.txt").ToList();
+            _words = File.ReadAllLines("..\\..\\..\\DataFiles\\Words.txt").ToList();
             
         }
        

@@ -13,9 +13,9 @@
         public void SetFile(int difficulty)
         {
             if (difficulty == (int)ELevel.Easy)
-                _filePath = "..\\..\\..\\HighScoresEasy.json";
+                _filePath = "..\\..\\..\\DataFiles\\HighScoresEasy.json";
             else
-                _filePath = "..\\..\\..\\HighScoresHard.json";
+                _filePath = "..\\..\\..\\DataFiles\\HighScoresHard.json";
         }
 
         public void HandleHighScores(TimeSpan timeTaken, int tries)
