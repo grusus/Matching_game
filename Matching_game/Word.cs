@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MatchingGame
+﻿namespace MatchingGame
 {
     public class Word
     {
@@ -12,13 +6,16 @@ namespace MatchingGame
         public string X { get; set; }
         public bool IsHidden { get; set; }
 
-
         public string GetWord()
         {
             if (IsHidden == false)
+            {
                 return HiddenWord;
-            else 
+            }
+            else
+            {
                 return X;
+            }
         }
     }
 }
