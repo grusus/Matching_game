@@ -3,7 +3,7 @@
     public class Board
     {
         public Word[,] BoardOfWords { get; set; }
-        private int _size;
+        private readonly int _size;
         
         public Board(int size)
         {
@@ -27,6 +27,7 @@
         public void WriteOutBoard(int chances)
         {
             Console.Clear();
+            DisplayLevel();
             Console.WriteLine($"\nChances left: {chances}");
             Console.Write("\n   ");
             for (int i = 1; i <= BoardOfWords.GetLength(1); i++)
@@ -55,6 +56,18 @@
                     }
                     Console.WriteLine();
                 }
+            }
+        }
+
+        private void DisplayLevel()
+        {
+            if (_size == 1)
+            {
+                Console.WriteLine("Level: easy");
+            }
+            else
+            {
+                Console.WriteLine("Level: hard");
             }
         }
     }

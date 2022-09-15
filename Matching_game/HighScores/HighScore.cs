@@ -3,7 +3,7 @@
     public class HighScore
     {
         private string _filePath;
-        private ReadWriteFile _fileHandler;
+        private readonly ReadWriteFile _fileHandler;
 
         public HighScore()
         {
@@ -37,7 +37,7 @@
             string name = Console.ReadLine();
             if (name.Length > 10)
             {
-                name = name.Substring(0, 10);
+                name = name[..10];
             }
             var player = new Player() { Name = name, DateTime = DateTime.Now, Duration = timeTaken.TotalSeconds, Tries = tries};
             _fileHandler.Highscores.Add(player);
@@ -49,7 +49,7 @@
             return ReadWriteFile.ReadFromJsonFile<Player>(_filePath);
         }
 
-        private void DisplayHighScores(List<Player> HighScores)
+        private static void DisplayHighScores(List<Player> HighScores)
         {
             Console.Clear();
             Console.WriteLine("------------------------HIGHSCORES-------------------------\n"

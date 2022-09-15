@@ -10,7 +10,7 @@ namespace MatchingGame
         private int _difficulty;
         private static int _chances;
         private static int _maxChances;
-        private HighScore _highScore;
+        private readonly HighScore _highScore;
 
         public Game()
         {
@@ -88,7 +88,7 @@ namespace MatchingGame
             _highScore.SetFile(_difficulty);
         }
 
-        private void CheckIfWordsAreEqual(Board board, Move move, Move move2)
+        private static void CheckIfWordsAreEqual(Board board, Move move, Move move2)
         {
             if (!(board.BoardOfWords[move2.Row, move2.Col].HiddenWord == board.BoardOfWords[move.Row, move.Col].HiddenWord))
             {

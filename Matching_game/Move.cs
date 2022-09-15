@@ -20,15 +20,14 @@
 
         private void ValidateUserInput(int nRows, int nCols, string userInput)
         {
-            if (userInput.Count() == 2)
+            if (userInput.Length == 2)
             {
                 ParseToEnum(userInput);
                 if (Row > nRows - 1)
                 {
                     GoodRow = false;
                 }
-                int column = 0;
-                if (!int.TryParse(userInput.Remove(0, 1), out column))
+                if (!int.TryParse(userInput.Remove(0, 1), out int column))
                 {
                     GoodCol = false;
                 }
@@ -42,7 +41,7 @@
                     GoodCol = false;
                 }
             }
-            if (userInput.Count() != 2 || GoodCol == false || GoodRow == false)
+            if (userInput.Length != 2 || GoodCol == false || GoodRow == false)
             {
                 Console.WriteLine("Invalid input");
             }
