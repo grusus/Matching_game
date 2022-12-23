@@ -34,7 +34,6 @@ namespace MatchingGame
             {
                 reader = new StreamReader(filePath);
                 var fileContents = reader.ReadToEnd();
-                //return JsonConvert.DeserializeObject<T>(fileContents);
                 List<T> items = JsonConvert.DeserializeObject <List<T>>(fileContents);
                 return items;
             }

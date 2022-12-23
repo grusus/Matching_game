@@ -61,13 +61,22 @@
 
         private void DisplayLevel()
         {
-            if (_size == 1)
+            if (_size == (int)ELevel.Easy)
             {
-                Console.WriteLine("Level: easy");
+                Console.WriteLine("Level: {0}", ELevel.Easy.ToString());
             }
             else
             {
-                Console.WriteLine("Level: hard");
+                Console.WriteLine("Level: {0}", ELevel.Hard.ToString());
+            }
+        }
+
+        public void CheckIfWordsAreEqual(Board board, Move move, Move move2)
+        {
+            if (!(board.BoardOfWords[move2.Row, move2.Col].HiddenWord == board.BoardOfWords[move.Row, move.Col].HiddenWord))
+            {
+                board.BoardOfWords[move2.Row, move2.Col].IsHidden = true;
+                board.BoardOfWords[move.Row, move.Col].IsHidden = true;
             }
         }
     }

@@ -31,15 +31,27 @@ namespace MatchingGame
             timer.Start();
             do
             {
-                board.WriteOutBoard(_chances);
-                Move move = GetMoveAndShowResultToConsole(board);
-                Move move2 = GetMoveAndShowResultToConsole(board);
-                CheckIfWordsAreEqual(board, move, move2);
-                Thread.Sleep(2000);
-                _chances--;
-                _playerWon = true;
+                MainLoop(board);
             } while (CheckIfPlayerWon() == false && _chances > 0);
             timer.Stop();
+            ShowResults(timer);
+        }
+
+        private void MainLoop(Board board)
+        {
+            board.WriteOutBoard(_chances);
+            Move move = new();
+            move = move.GetMoveAndShowResultToConsole(board, _chances);
+            Move move2 = new();
+            move2 = move2.GetMoveAndShowResultToConsole(board, _chances);
+            board.CheckIfWordsAreEqual(board, move, move2);
+            Thread.Sleep(2000);
+            _chances--;
+            _playerWon = true;
+        }
+
+        private void ShowResults(Stopwatch timer)
+        {
             if (_chances == 0 && _playerWon == false)
             {
                 Console.WriteLine("\nYou are out of chances");
@@ -58,11 +70,11 @@ namespace MatchingGame
         {
             switch (_difficulty)
             {
-                case 1:
+                case (int)ELevel.Easy:
                     _chances = 10;
                     _maxChances = 10;
                     break;
-                case 2:
+                case (int)ELevel.Hard:
                     _chances = 15;
                     _maxChances = 15;
                     break;
@@ -80,41 +92,12 @@ namespace MatchingGame
             Console.Write("\nYour choice: ");
             do
             {
-                while (!int.TryParse(Console.ReadLine(), out _difficulty) || (!(_difficulty == 1 || _difficulty == 2)))
+                while (!int.TryParse(Console.ReadLine(), out _difficulty) || (!(_difficulty == (int)ELevel.Easy || _difficulty == (int)ELevel.Hard)))
                 {
                     Console.WriteLine("Invalid input, try again");
                 }
-            } while (!(_difficulty == 1 || _difficulty == 2));
+            } while (!(_difficulty == (int)ELevel.Easy || _difficulty == (int)ELevel.Hard));
             _highScore.SetFile(_difficulty);
-        }
-
-        private static void CheckIfWordsAreEqual(Board board, Move move, Move move2)
-        {
-            if (!(board.BoardOfWords[move2.Row, move2.Col].HiddenWord == board.BoardOfWords[move.Row, move.Col].HiddenWord))
-            {
-                board.BoardOfWords[move2.Row, move2.Col].IsHidden = true;
-                board.BoardOfWords[move.Row, move.Col].IsHidden = true;
-            }
-        }
-
-        private Move GetMoveAndShowResultToConsole(Board board)
-        {
-            Move move = new();
-            move.GetMove(board.BoardOfWords.GetLength(0), board.BoardOfWords.GetLength(1));
-            if (board.BoardOfWords[move.Row, move.Col].IsHidden == false)
-            {
-                Console.WriteLine("Field already visible");
-                move = GetMoveAndShowResultToConsole(board);
-            }
-            else
-            {
-                if (board.BoardOfWords[move.Row, move.Col].IsHidden == true)
-                {
-                    board.BoardOfWords[move.Row, move.Col].IsHidden = false;
-                }
-            }
-            board.WriteOutBoard(_chances);
-            return move;
         }
 
         private void LoadWordsFromFile()

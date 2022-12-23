@@ -82,5 +82,25 @@
                     }
             }
         }
+
+        public Move GetMoveAndShowResultToConsole(Board board, int chances)
+        {
+            Move move = new();
+            move.GetMove(board.BoardOfWords.GetLength(0), board.BoardOfWords.GetLength(1));
+            if (board.BoardOfWords[move.Row, move.Col].IsHidden == false)
+            {
+                Console.WriteLine("Field already visible");
+                move = GetMoveAndShowResultToConsole(board, chances);
+            }
+            else
+            {
+                if (board.BoardOfWords[move.Row, move.Col].IsHidden == true)
+                {
+                    board.BoardOfWords[move.Row, move.Col].IsHidden = false;
+                }
+            }
+            board.WriteOutBoard(chances);
+            return move;
+        }
     }
 }
